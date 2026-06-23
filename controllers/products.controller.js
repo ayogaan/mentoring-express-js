@@ -47,6 +47,8 @@ const createProduct = async (req, res) => {
     const { name, price, id_category } = req.body;
     try {
         const product = await Product.create({ name, price, id_category });
+        product.dataValues.createdBy = req.user;
+        console.log("product : ", product);
         res.status(201).json(product);
     }catch (error) {
         console.log(error);
